@@ -16,7 +16,7 @@
             background-color: #f0f8ff;
         }
         .container {
-            text-align: center;
+            text-align: start;
             padding: 20px;
             border: 2px solid #ccc;
             border-radius: 10px;
@@ -33,8 +33,23 @@
 </head>
 <body>
     <div class="container">
-        <h1>Hello, World!</h1>
-        <p>Welcome to this beautiful HTML page rendered with Flask.</p>
+        <h1>Welcome to the Flask Quizzer!</h1>
+
+        <p>This is a Flask web application! It responds to HTTP requests with JSON objects.</p>
+        <ul>
+            <li><b>app.py</b>: contains the Flask webserver for handling HTTP requests.</li>
+            <li><b>quizzer.py</b>: provdes the functions for getting questions and checking answers.</li>
+            <li><b>questions.py</b>: contains only the data, i.e., questions and answers for the quiz.</li>
+        </ul>
+        <p>You can make requests to the following endpoints:</p>
+        <ul>
+            <li><b>/api/question/[int]:</b> <a href="/api/question/0">/api/question/0</a></li>
+            <li><b>/api/question/[int]/answer/[int]:</b>
+                <ul>
+                    <li>Correct answer: <a href="/api/question/1/answer/0">/api/question/1/answer/0</a></li>
+                    <li>Inorrect answer: <a href="/api/question/1/answer/2">/api/question/1/answer/2</a></li>
+                </ul>
+            <li><b>/api/random-question:</b> <a href="/api/random-question">/api/random-question</a></li>
     </div>
 </body>
 </html>

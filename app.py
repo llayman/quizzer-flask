@@ -11,11 +11,11 @@ def create_app():
     def hello_world():
         return render_template('index.html')
 
-    @app.route('/random-question')
+    @app.route('/api/random-question')
     def get_random_question():
         return vars(quizzer.get_random_question())
 
-    @app.route('/question/<int:question_id>/answer/<int:answer>')
+    @app.route('/api/question/<int:question_id>/answer/<int:answer>')
     def check_answer(question_id: int, answer: int):
         try:
             return {
@@ -30,7 +30,7 @@ def create_app():
                 'Error': str(e),
             }, 400
 
-    @app.route('/question/<int:question_id>')
+    @app.route('/api/question/<int:question_id>')
     def get_question(question_id: int):
         try:
             return {
