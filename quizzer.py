@@ -20,21 +20,17 @@ def check_answer(question_id: int, answer: int) -> bool:
         answer (int): the index of the answer in the choices list
 
     Raises:
-        ValueError: raised if the question_id is not an integer or not in the range of the questions list
-        ValueError: raised if the answer is not an integer or not in the range of the choices list
+        ValueError: raised if the question_id is not an integer in the range of the questions list
+        ValueError: raised if the answer is not an integer in the range of the choices list
 
     Returns:
         bool: True if the answer is correct, False otherwise
     """
-
-    if not isinstance(question_id, int) or not 0 <= question_id < len(QUESTIONS):
-        raise ValueError(f"Provide a question id between 0 and {len(QUESTIONS)}")
-    
-    question = QUESTIONS[question_id]
+    question = get_question(question_id)
 
     if not isinstance(answer, int) or not 0 <= answer < len(question.choices):
-        raise ValueError(F"Provider an answer index between 0 and {len(question.choices)}")
-    
+        raise ValueError(f"Provider an answer index between 0 and {len(question.choices) - 1}")
+
     return question.answer_index == answer
 
 def get_question(question_id: int) -> MultipleChoiceQuestion:
@@ -50,6 +46,6 @@ def get_question(question_id: int) -> MultipleChoiceQuestion:
         MultipleChoiceQuestion: the question
     """
     if not isinstance(question_id, int) or not 0 <= question_id < len(QUESTIONS):
-        raise ValueError(f"Provide a question id between 0 and {len(QUESTIONS)}")
+        raise ValueError(f"Provide a question id between 0 and {len(QUESTIONS) - 1}")
 
     return QUESTIONS[question_id]
