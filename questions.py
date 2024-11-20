@@ -12,7 +12,7 @@ class MultipleChoiceQuestion:
             answer_index (int): The index of the correct answer in the choices list
             choices (list[str]): the list of choices for the question
         """
-        self.question_id = uuid.uuid4()  # Generate a unique ID for the question
+        self.question_id = str(uuid.uuid4())  # Generate a unique ID for the question
         self.question_text = question_text
         self.answer_index = answer_index
         self.choices = choices

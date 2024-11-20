@@ -9,14 +9,34 @@ def create_app():
 
     @app.route('/')
     def hello_world():
+        """Return the homepage from templates/index.html"""
         return render_template('index.html')
 
     @app.route('/api/random-question')
     def get_random_question():
+        """
+            Return a random question from the quizzer module as a dictionary.
+
+            Supports requests of the form http://<host>:<port>/api/random-question
+            For example, http://localhost:5000/api/random-question
+    
+        Returns:
+            dict: dictionary containing the http response, status code, and the question as a dict (question_id, question_text, choices, and answer_index).
+        """
+
         return vars(quizzer.get_random_question())
 
-    @app.route('/api/question/<int:question_id>/answer/<int:answer>')
-    def check_answer(question_id: int, answer: int):
+    @app.route('/api/question/<str:question_id>/answer/<int:answer>')
+    def check_answer(question_id: str, answer: int):
+        """Returns whether the answer is correct for the given question wrapped in a dictionary object.
+
+        Args:
+            question_id (str): the unique identifer (UUID) of the question
+            answer (int): the index of the answer in the choices list
+
+        Returns:
+            dict: dictionary containing the http responses, status code, and a boolean of whether the answer is correct.
+        """
         try:
             return {
                 'message': "Ok",
@@ -30,8 +50,16 @@ def create_app():
                 'Error': str(e),
             }, 400
 
-    @app.route('/api/question/<int:question_id>')
-    def get_question(question_id: int):
+    @app.route('/api/question/<str:question_id>')
+    def get_question(question_id: str):
+        """Returns the question with the given question_id wrapped in a dictionary.
+
+        Args:
+            question_id (str): the unique identifier (UUID) of the quesiton
+
+        Returns:
+            dict: dictionary containing the http response, status code, and the question as a dict (question_id, question_text, choices, and answer_index).
+        """
         try:
             return {
                 'message': "Ok",
