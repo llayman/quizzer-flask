@@ -12,15 +12,15 @@ def get_random_question() -> MultipleChoiceQuestion:
     """
     return random.choice(QUESTIONS)
 
-def check_answer(question_id: int, answer: int) -> bool:
+def check_answer(question_id: str, answer: int) -> bool:
     """Check if the answer provided is correct.
 
     Args:
-        question_id (int): the index of the question in QUESTIONS
+        question_id (str): the unique id of the question in QUESTIONS
         answer (int): the index of the answer in the choices list
 
     Raises:
-        ValueError: raised if the question_id is not an integer in the range of the questions list
+        ValueError: raised if the question_id is not a string or is not in the QUESTIONS list
         ValueError: raised if the answer is not an integer in the range of the choices list
 
     Returns:
@@ -33,19 +33,23 @@ def check_answer(question_id: int, answer: int) -> bool:
 
     return question.answer_index == answer
 
-def get_question(question_id: int) -> MultipleChoiceQuestion:
+def get_question(question_id: str) -> MultipleChoiceQuestion:
     """Return a question by its id
 
     Args:
-        question_id (int): the index of the question in QUESTIONS
+        question_id (str): the unique id of the question in QUESTIONS
 
     Raises:
-        ValueError: raised if the question_id is not an integer or not in the range of the questions
+        ValueError: raised if the question_id is not a string or is not in the QUESTIONS list
 
     Returns:
         MultipleChoiceQuestion: the question
     """
-    if not isinstance(question_id, int) or not 0 <= question_id < len(QUESTIONS):
-        raise ValueError(f"Provide a question id between 0 and {len(QUESTIONS) - 1}")
+    if not isinstance(question_id, str):
+        raise ValueError("Question id must be a string.")
 
-    return QUESTIONS[question_id]
+    for question in QUESTIONS:
+        if question.question_id == question_id:
+            return question
+
+    raise ValueError(f"Question with id {question_id} not found.")
