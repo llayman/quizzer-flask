@@ -26,7 +26,7 @@ def create_app():
 
         return vars(quizzer.get_random_question())
 
-    @app.route('/api/question/<str:question_id>/answer/<int:answer>')
+    @app.route('/api/question/<question_id>/answer/<int:answer>')
     def check_answer(question_id: str, answer: int):
         """Returns whether the answer is correct for the given question wrapped in a dictionary object.
 
@@ -50,7 +50,7 @@ def create_app():
                 'Error': str(e),
             }, 400
 
-    @app.route('/api/question/<str:question_id>')
+    @app.route('/api/question/<question_id>')
     def get_question(question_id: str):
         """Returns the question with the given question_id wrapped in a dictionary.
 
