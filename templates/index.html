@@ -43,11 +43,11 @@
         </ul>
         <p>You can make requests to the following endpoints:</p>
         <ul>
-            <li><b>/api/question/[int]:</b> <a href="/api/question/0">/api/question/0</a></li>
+            <li><b>/api/question/[int]:</b> <a href="/api/question/{{ question.question_id }}">/api/question/{{ question.question_id }}</a></li>
             <li><b>/api/question/[int]/answer/[int]:</b>
                 <ul>
-                    <li>Correct answer: <a href="/api/question/1/answer/0">/api/question/1/answer/0</a></li>
-                    <li>Inorrect answer: <a href="/api/question/1/answer/2">/api/question/1/answer/2</a></li>
+                    <li>Correct answer: <a href="/api/question/{{ question.question_id }}/answer/0">/api/question/{{ question.question_id }}/answer/0</a></li>
+                    <li>Inorrect answer: <a href="/api/question/{{ question.question_id }}/answer/1">/api/question/{{ question.question_id }}/answer/1</a></li>
                 </ul>
             <li><b>/api/random-question:</b> <a href="/api/random-question">/api/random-question</a></li>
     </div>

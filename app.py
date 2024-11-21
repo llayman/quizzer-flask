@@ -2,6 +2,7 @@
 from flask import Flask, render_template
 
 import quizzer
+from questions import QUESTIONS
 
 def create_app():
     """ Factory method for creating the flask app server"""
@@ -10,7 +11,7 @@ def create_app():
     @app.route('/')
     def hello_world():
         """Return the homepage from templates/index.html"""
-        return render_template('index.html')
+        return render_template('index.html', question=QUESTIONS[0])
 
     @app.route('/api/random-question')
     def get_random_question():
